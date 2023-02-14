@@ -3,6 +3,7 @@
 // 
 
 // Lottie player
+
 window.addEventListener('DOMContentLoaded', event => {
 
     // Navbar shrink function
@@ -24,6 +25,24 @@ window.addEventListener('DOMContentLoaded', event => {
 
     // Shrink the navbar when page is scrolled
     document.addEventListener('scroll', navbarShrink);
+
+    // LottieAnim Hide function
+    var LottieHide = function () {
+        const LottieAnimation = document.body.querySelector('#arrowContainer');
+        if (!LottieAnimation) {
+            return;
+        }
+        if (window.scrollY < 200) {
+            LottieAnimation.classList.remove('hide')
+        } else {
+            LottieAnimation.classList.add('hide')
+        }
+
+    };
+    LottieHide();
+    document.addEventListener('scroll', LottieHide);
+
+    
 /*
     // Lottie animation
     var lottieArrow = function (){
@@ -48,6 +67,10 @@ window.addEventListener('DOMContentLoaded', event => {
     if (mainNav) {
         new bootstrap.ScrollSpy(document.body, {
             target: '#mainNav',
+            offset: 74,
+        });
+        new bootstrap.ScrollSpy(document.body, {
+            target: '#arrowDown',
             offset: 74,
         });
     };
