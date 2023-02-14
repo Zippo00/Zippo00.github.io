@@ -11872,7 +11872,7 @@ form button:hover {
   border: 0;
   outline: none;
   cursor: pointer;
-  width: 400px;
+  width: 300px;
   margin: 20px;
   border-radius: 50px;
   transition: transform .2s;
