@@ -72,7 +72,7 @@
                         <h2 class="text-white mb-4">What I am currently up to</h2>
                             <p></p>
                             <UL class="text-white text-opacity-75" TYPE="CIRCLE">
-                            <LI><p class="text-white text-opacity-75">Wrapping up Bachelor's degree in Computer Science & Engineering and <br>starting with Master's degree focusing on AI.</LI></p>
+                            <LI><p class="text-white text-opacity-75">Wrapping up Bachelor's Degree in Computer Science & Engineering and <br>starting with Master's Degree focusing on AI.</LI></p>
                             <LI><p class="text-white text-opacity-75">Working as Project Manager and Developer for a software that utilizes <br>OpenAI's GPT-3 to assist users with assessing system security.</LI></p>
                             </UL>
                         </p>
@@ -240,7 +240,7 @@
                             <br>
                             <br>
                             <!--<a href="assets/download/CV, Mikko Lempinen 2023.pdf" download="Mikko Lempinen, CV" target="_blank">-->
-                            <button class="button2" type="button" onclick="window.open('assets/download/CV, Mikko Lempinen 2023.pdf')"><i class="fa fa-id-card" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Resume </button>
+                            <button class="button2" type="button" onclick="window.open('assets/download/CV, Mikko Lempinen 2023.pdf')"><i class="fa fa-id-card" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;<strong>Resume</strong> </button>
                             <br>
                             <br>
                             <br>
@@ -279,7 +279,7 @@
                         
                     </div>
                         <div class="contact-container">
-                            <form onsubmit="sendEmail(); reset();return false;">
+                            <form onsubmit="sendEmail(); reset(); return false;">
                                 <h3 class="form-h3">Get in touch</h3>
                                 <input type="text" id="name" placeholder="Name" required>
                                 <input type="email" id="email" placeholder="Email" required>
@@ -293,9 +293,7 @@
                         <script>
                             function sendEmail(){
                                 Email.send({
-                                Host : "smtp.gmail.com",
-                                Username : "smtpjs.com",
-                                Password : "Encrypt credentials",
+                                SecureToken : "61b688ba-72fb-4a7d-98eb-785de8e2433f",
                                 To : 'check yt video from liked videos',
                                 From : document.getElementById("email").value,
                                 Subject : document.getElementById("subject").value,
@@ -316,6 +314,7 @@
 
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <strong>Mikko Lempinen</strong></div></footer>
+        <script>src="https://smtpjs.com/v3/smtp.js"</script>
         <script src="js/scripts.js"></script>
     </body>
 </html>
