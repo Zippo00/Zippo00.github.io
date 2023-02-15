@@ -43,25 +43,6 @@ window.addEventListener('DOMContentLoaded', event => {
     document.addEventListener('scroll', LottieHide);
 
     
-/*
-    // Lottie animation
-    var lottieArrow = function (){
-        const downArrow = document.body.querySelector('#arrowDown');
-        if (!downArrow) {
-            return;
-        }
-        if (window.scrollY === 0) {
-            downArrow.classList.add('arrowAnim')
-        } else {
-            downArrow.classList.remove('arrowAnim')
-        }
-    }
-
-    // Activate the animation
-    lottieArrow();
-    // Remove downArrow animation when page is scrolled
-    document.addEventListener('scroll', lottieArrow)
-*/
     // Activate Bootstrap scrollspy on the main nav element
     const mainNav = document.body.querySelector('#mainNav');
     if (mainNav) {
@@ -89,17 +70,3 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
-function sendEmail(){
-    Email.send({
-        SecureToken : "61b688ba-72fb-4a7d-98eb-785de8e2433f",
-        To : 'mikko.lempinen96@gmail.com',
-        From : document.getElementById("email").value,
-        Subject : document.getElementById("subject").value,
-        Body : "Name: " + document.getElementById("name").value
-            + "<br> Organisation: " + document.getElementById("org").value 
-            + "<br> Email: " + document.getElementById("email").value 
-            + "<br> Message: " +document.getElementById("message").value
-    }).then(
-    message => alert(message)
-    );
-}

@@ -269,44 +269,26 @@
                 </div>
             </div>
         </section>
-        <!-- Signup-->
+        <!-- Contact-->
         <section class="signup-section" id="contact">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5">
                     <div class="col-md-10 col-lg-10 mx-auto text-center">
                         <i class="fa-regular fa-envelope fa-3x mb-0 text-white"></i>
                         <h2 class="text-white mb-0 mx-auto">For any questions or business inquiries, <br>don't hesitate to get in touch</h2>
-                        
                     </div>
-                        <div class="contact-container">
-                            <form onsubmit="sendEmail(); reset(); return false;">
-                                <h3 class="form-h3">Get in touch</h3>
-                                <input type="text" id="name" placeholder="Name" required>
-                                <input type="email" id="email" placeholder="Email" required>
-                                <input type="text" id="org" placeholder="Organisation (Optional)">
-                                <input type="text" id="subject" placeholder="Subject (Optional)">
-                                <textarea id="message" rows="6" placeholder="Type your message here" required></textarea>
-                                <button type="submit">Send</button>
-                            </form>
-                        </div>
-                        <script>src="https://smtpjs.com/v3/smtp.js"</script>
-                        <script>
-                            function sendEmail(){
-                                Email.send({
-                                    SecureToken : "61b688ba-72fb-4a7d-98eb-785de8e2433f",
-                                    To : 'mikko.lempinen96@gmail.com',
-                                    From : document.getElementById("email").value,
-                                    Subject : document.getElementById("subject").value,
-                                    Body : "Name: " + document.getElementById("name").value
-                                        + "<br> Organisation: " + document.getElementById("org").value 
-                                        + "<br> Email: " + document.getElementById("email").value 
-                                        + "<br> Message: " +document.getElementById("message").value
-                                }).then(
-                                message => alert(message)
-                                );
-                            }
-                        </script>
+                    <div class="contact-container">
+                        <form action="https://formspree.io/f/xyyaeald" method="POST" id="contactForm">
+                            <h3 class="form-h3">Get In Touch</h3>
+                            <input type="text" name="name" placeholder="Name" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="text" name="org" placeholder="Organisation (Optional)">
+                            <input type="text" name="subject" placeholder="Subject (Optional)">
+                            <textarea name="message" rows="6" placeholder="Type your message here" required></textarea>
+                            <button id="sendButton" type="submit" onClick="document.getElementById('formStatus').scrollIntoView()">Send</button>
                         </form>
+                    </div>
+                    <div class="" id="formStatus"></div>            
                 </div>
             </div>
         </section>
@@ -314,7 +296,41 @@
 
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <strong>Mikko Lempinen</strong></div></footer>
-        <script>src="https://smtpjs.com/v3/smtp.js"</script>
         <script src="js/scripts.js"></script>
+        <script>
+            var form = document.getElementById("contactForm");
+
+            async function handleSubmit(event) {
+              event.preventDefault();
+              var status = document.getElementById("formStatus");
+              var data = new FormData(event.target);
+              fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+              }).then(response => {
+                if (response.ok) {
+                  status.classList.add('success')
+                  status.innerHTML = "Thanks for your message!";
+                  form.reset()
+                } else {
+                  response.json().then(data => {
+                    if (Object.hasOwn(data, 'errors')) {
+                      status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+                    } else {
+                      status.classList.add('error')
+                      status.innerHTML = "Oops! There was a problem submitting your message. <br>If the problem persists, you can contact me via email at mikko.lempinen96@gmail.com"
+                    }
+                  })
+                }
+              }).catch(error => {
+                status.classList.add('error')
+                status.innerHTML = "Oops! There was a problem submitting your message. <br>If the problem persists, you can contact me via email at mikko.lempinen96@gmail.com"
+              });
+            }
+            form.addEventListener("submit", handleSubmit)
+        </script>
     </body>
 </html>
