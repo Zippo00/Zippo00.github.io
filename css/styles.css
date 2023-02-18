@@ -11633,6 +11633,10 @@ body {
 .about-section p {
   margin-bottom: 5rem;
 }
+.about-section h2, .about-section .h2 {
+  font-size: 3rem;
+  max-width: 45rem;
+}
 
 .projects-section {
   width: 100%;
