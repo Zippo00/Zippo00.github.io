@@ -11910,7 +11910,7 @@ form button:hover {
 .button2 {
   align-self: center;
   padding: 15px;
-  background: var(--bs-info);
+  background: #FD9940;
   color: #fff;
   font-size: 36px;
   border: 0;
