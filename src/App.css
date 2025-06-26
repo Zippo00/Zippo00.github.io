@@ -1,0 +1,445 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+  overflow-x: hidden;
+}
+
+/* App container */
+.app {
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Dark theme (default) */
+.dark-theme {
+  background-color: #000000;
+  color: #00ff00;
+}
+
+.dark-theme .terminal {
+  background-color: #000000;
+  color: #00ff00;
+  border: 2px solid #333333;
+}
+
+.dark-theme .terminal-header {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333333;
+}
+
+.dark-theme .terminal-input {
+  background-color: transparent;
+  color: #00ff00;
+  border: none;
+}
+
+.dark-theme .terminal-input::placeholder {
+  color: #006600;
+}
+
+.dark-theme .prompt {
+  color: #00ff00;
+}
+
+.dark-theme .cursor {
+  /* color: #00ff00; */
+  color: transparent;
+  animation: blink-safe 1s infinite;
+}
+
+.dark-theme .theme-toggle {
+  background-color: #1a1a1a;
+  color: #00ff00;
+  border: 1px solid #333333;
+}
+
+.dark-theme .theme-toggle:hover {
+  background-color: #333333;
+}
+
+.dark-theme .footer {
+  background-color: #1a1a1a;
+  color: #00ff00;
+  border-top: 1px solid #333333;
+}
+
+/* Light theme */
+.light-theme {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.light-theme .terminal {
+  background-color: #f8f9fa;
+  color: #333333;
+  border: 2px solid #dee2e6;
+}
+
+.light-theme .terminal-header {
+  background-color: #e9ecef;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.light-theme .terminal-input {
+  background-color: transparent;
+  color: #333333;
+  border: none;
+}
+
+.light-theme .terminal-input::placeholder {
+  color: #6c757d;
+}
+
+.light-theme .prompt {
+  color: #007bff;
+}
+
+.light-theme .cursor {
+  /* color: #333333; */
+  color: transparent;
+  animation: blink-safe 1s infinite;
+}
+
+.light-theme .theme-toggle {
+  background-color: #e9ecef;
+  color: #333333;
+  border: 1px solid #dee2e6;
+}
+
+.light-theme .theme-toggle:hover {
+  background-color: #dee2e6;
+}
+
+.light-theme .footer {
+  background-color: #f8f9fa;
+  color: #333333;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 15px;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:focus {
+  outline: none;
+  transform: scale(1.1);
+}
+
+/* Terminal container */
+.terminal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Terminal header */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 8px 8px 0 0;
+  position: relative;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.control-button.close {
+  background-color: #ff5f57;
+}
+
+.control-button.minimize {
+  background-color: #ffbd2e;
+}
+
+.control-button.maximize {
+  background-color: #28ca42;
+}
+
+.terminal-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Terminal */
+.terminal {
+  flex: 1;
+  padding: 20px;
+  border-radius: 0 0 8px 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-y: auto;
+  max-height: 70vh;
+  cursor: text;
+}
+
+/* Terminal lines */
+.terminal-line {
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.terminal-line.system {
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.terminal-line.command {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.terminal-line.output {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.terminal-line.error {
+  color: #ff6b6b;
+}
+
+/* Input line */
+.input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.prompt {
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.terminal-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+  background: transparent;
+}
+
+/*TEXT SELECTION BUG FIXES*/
+.cursor {
+  margin-left: 2px;
+  font-weight: bold;
+
+  pointer-events: none; /*Prevent cursor from interfering with text selection*/
+  user-select: none; /*Make cursor non-selectable*/
+  position: relative;
+  display: inline-block;
+
+  will-change: transform; /* GPU acceleration to prevent layout disruption */
+  transform-origin: center bottom; /* Scale from bottom for better visual effect */
+}
+
+/* Use GPU-accelerated animation that won't disrupt text selection */
+.dark-theme .cursor {
+  /*color: #00ff00;*/
+  color: transparent;
+  animation: blink-safe 1s infinite;
+}
+light-theme .cursor {
+  color: #333333;
+  /*color: transparent;*/
+  animation: blink-safe 1s infinite;
+} 
+
+
+
+/* Cursor blinking animation */
+@keyframes blink {
+  0%, 50% {
+    /* opacity: 1; */
+    transform: scaleY(1);
+  }
+  51%, 100% {
+    /* opacity: 0; */
+    transform: scaleY(0);
+  }
+}
+/* Alternative approach: use opacity with will-change for GPU acceleration */
+@keyframes blink-safe {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+} 
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .terminal-container {
+    padding: 10px;
+    min-height: calc(100vh - 60px);
+  }
+  
+  .terminal {
+    padding: 15px;
+    font-size: 12px;
+    max-height: 60vh;
+  }
+  
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+  
+  .terminal-header {
+    padding: 8px 12px;
+  }
+  
+  .terminal-title {
+    font-size: 12px;
+  }
+  
+  .control-button {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-container {
+    padding: 5px;
+  }
+  
+  .terminal {
+    padding: 10px;
+    font-size: 11px;
+    max-height: 55vh;
+  }
+  
+  .terminal-title {
+    display: none;
+  }
+  
+  .theme-toggle {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+
+/* Scrollbar styling for dark theme */
+.dark-theme .terminal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-theme .terminal::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.dark-theme .terminal::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+.dark-theme .terminal::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+/* Scrollbar styling for light theme */
+.light-theme .terminal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.light-theme .terminal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.light-theme .terminal::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.light-theme .terminal::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Selection styling */
+.dark-theme ::selection {
+  background-color: #004400;
+  color: #00ff00;
+}
+
+.light-theme ::selection {
+  background-color: #b3d4fc;
+  color: #333333;
+}
+
+/* Focus states */
+.terminal-input:focus {
+  outline: none;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+  
+  .theme-toggle,
+  .app {
+    transition: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .theme-toggle {
+    display: none;
+  }
+  
+  .terminal-container {
+    max-height: none;
+  }
+  
+  .terminal {
+    max-height: none;
+    overflow: visible;
+  }
+}
