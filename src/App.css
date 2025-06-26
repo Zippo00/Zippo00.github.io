@@ -19,7 +19,9 @@ body {
 
 /* Dark theme (default) */
 .dark-theme {
-  background-color: #000000;
+  /* background-color: #000000; */
+  background: #5c5c5c;
+  background: linear-gradient(0deg,rgba(92, 92, 92, 1) 0%, rgba(27, 148, 45, 1) 50%, rgba(0, 222, 18, 1) 100%);
   color: #00ff00;
 }
 
@@ -72,7 +74,8 @@ body {
 
 /* Light theme */
 .light-theme {
-  background-color: #ffffff;
+  background: #5c5c5c;
+  background: linear-gradient(0deg,rgba(92, 92, 92, 1) 0%, rgba(27, 148, 45, 1) 50%, rgba(0, 222, 18, 1) 100%);
   color: #333333;
 }
 
