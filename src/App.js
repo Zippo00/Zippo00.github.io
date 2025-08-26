@@ -264,7 +264,7 @@ Feel free to reach out for collaborations or opportunities!`
     
     resume: () => ({
       type: 'output',
-      content: `Resume download link: https://www.mikkolempinen.dev/frontend/public/Resume_Mikko_Lempinen.pdf`
+      content: `Resume download link: https://www.mikkolempinen.dev/public/Resume_Mikko_Lempinen.pdf`
     }),
     
     clear: () => {
